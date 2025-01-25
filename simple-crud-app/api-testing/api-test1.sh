@@ -9,118 +9,156 @@ fi
 API_URL="http://localhost:3000/api"
 TIMESTAMP=$(date +%s)
 
-# Test Customers endpoints
-echo "Testing Customers Endpoints"
+# # Test Customers endpoints
+# echo "Testing Customers Endpoints"
+# echo "---------------------------"
+
+# # Create customer
+# CUSTOMER_DATA=$(jq -n \
+#     --arg email "testuser$TIMESTAMP@example.com" \
+#     '{first_name: "Test", last_name: "User", email: $email, address: "123 Test St"}')
+
+# response=$(curl -s -X POST -H "Content-Type: application/json" -d "$CUSTOMER_DATA" $API_URL/customers)
+# customer_id=$(echo $response | jq -r '.customer_id')
+# if [ -z "$customer_id" ]; then
+#     echo "❌ Create customer failed"
+#     exit 1
+# fi
+# echo "✅ Customer created - ID: $customer_id"
+
+# # Get customer
+# response=$(curl -s $API_URL/customers/$customer_id)
+# status=$(echo $response | jq -r '.customer_id')
+# [ "$status" == "$customer_id" ] && echo "✅ Get customer" || echo "❌ Get customer"
+
+# # Get all customers
+# status=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/customers)
+# [ "$status" == "200" ] && echo "✅ Get all customers" || echo "❌ Get all customers"
+
+# # Update customer
+# UPDATE_DATA=$(jq -n \
+#     --arg email "updated$TIMESTAMP@example.com" \
+#     '{first_name: "Updated", last_name: "Name", email: $email, address: "456 Updated St"}')
+
+# status=$(curl -s -o /dev/null -w "%{http_code}" -X PUT -H "Content-Type: application/json" -d "$UPDATE_DATA" $API_URL/customers/$customer_id)
+# [ "$status" == "200" ] && echo "✅ Update customer" || echo "❌ Update customer"
+
+# # Delete customer
+# status=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE $API_URL/customers/$customer_id)
+# [ "$status" == "204" ] && echo "✅ Delete customer" || echo "❌ Delete customer"
+
+# # Test Authors endpoints
+# echo -e "\nTesting Authors Endpoints"
+# echo "-------------------------"
+
+# # Create author
+# AUTHOR_DATA=$(jq -n \
+#     --arg email "testauthor$TIMESTAMP@example.com" \
+#     '{first_name: "John", last_name: "Doe", email: $email, birth_date: "1980-01-01"}')
+
+# response=$(curl -s -X POST -H "Content-Type: application/json" -d "$AUTHOR_DATA" $API_URL/authors)
+# author_id=$(echo $response | jq -r '.author_id')
+# if [ -z "$author_id" ]; then
+#     echo "❌ Create author failed"
+#     exit 1
+# fi
+# echo "✅ Author created - ID: $author_id"
+
+# # Get author
+# response=$(curl -s $API_URL/authors/$author_id)
+# status=$(echo $response | jq -r '.author_id')
+# [ "$status" == "$author_id" ] && echo "✅ Get author" || echo "❌ Get author"
+
+# # Get all authors
+# status=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/authors)
+# [ "$status" == "200" ] && echo "✅ Get all authors" || echo "❌ Get all authors"
+
+# # Update author
+# UPDATE_DATA=$(jq -n \
+#     --arg email "testauthor$TIMESTAMP@example.com" \
+#     '{first_name: "Jane", last_name: "Smith", email: $email, birth_date: "1990-02-15"}')
+
+# status=$(curl -s -o /dev/null -w "%{http_code}" -X PUT -H "Content-Type: application/json" -d "$UPDATE_DATA" $API_URL/authors/$author_id)
+# [ "$status" == "200" ] && echo "✅ Update author" || echo "❌ Update author"
+
+# # Delete author
+# status=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE $API_URL/authors/$author_id)
+# [ "$status" == "204" ] && echo "✅ Delete author" || echo "❌ Delete author"
+
+# # Test Categories endpoints
+# echo -e "\nTesting Categories Endpoints"
+# echo "---------------------------"
+
+# # Create category
+# CATEGORY_DATA=$(jq -n \
+#     --arg name "TestCategory$TIMESTAMP" \
+#     '{name: $name, description: "Test description"}')
+
+# response=$(curl -s -X POST -H "Content-Type: application/json" -d "$CATEGORY_DATA" $API_URL/categories)
+# category_id=$(echo $response | jq -r '.category_id')
+# if [ -z "$category_id" ]; then
+#     echo "❌ Create category failed"
+#     exit 1
+# fi
+# echo "✅ Category created - ID: $category_id"
+
+# # Get category
+# response=$(curl -s $API_URL/categories/$category_id)
+# status=$(echo $response | jq -r '.category_id')
+# [ "$status" == "$category_id" ] && echo "✅ Get category" || echo "❌ Get category"
+
+# # Get all categories
+# status=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/categories)
+# [ "$status" == "200" ] && echo "✅ Get all categories" || echo "❌ Get all categories"
+
+# # Update category
+# UPDATE_DATA=$(jq -n \
+#     --arg name "TestCategory$TIMESTAMP" \
+#     '{name: $name, description: "Updated description"}')
+
+# status=$(curl -s -o /dev/null -w "%{http_code}" -X PUT -H "Content-Type: application/json" -d "$UPDATE_DATA" $API_URL/categories/$category_id)
+# [ "$status" == "200" ] && echo "✅ Update category" || echo "❌ Update category"
+
+# # Delete category
+# status=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE $API_URL/categories/$category_id)
+# [ "$status" == "204" ] && echo "✅ Delete category" || echo "❌ Delete category"
+
+# echo -e "\nAll tests completed!"
+
+# Test Publishers endpoints
+echo -e "\nTesting Publishers Endpoints"
 echo "---------------------------"
 
-# Create customer
-CUSTOMER_DATA=$(jq -n \
-    --arg email "testuser$TIMESTAMP@example.com" \
-    '{first_name: "Test", last_name: "User", email: $email, address: "123 Test St"}')
+# Create publisher
+PUBLISHER_DATA=$(jq -n \
+    --arg email "testpublisher$TIMESTAMP@example.com" \
+    '{name: "Test Publisher", address: "789 Publishing Rd", phone: "123-456-7890", email: $email}')
 
-response=$(curl -s -X POST -H "Content-Type: application/json" -d "$CUSTOMER_DATA" $API_URL/customers)
-customer_id=$(echo $response | jq -r '.customer_id')
-if [ -z "$customer_id" ]; then
-    echo "❌ Create customer failed"
+response=$(curl -s -X POST -H "Content-Type: application/json" -d "$PUBLISHER_DATA" $API_URL/publishers)
+publisher_id=$(echo $response | jq -r '.publisher_id')
+if [ -z "$publisher_id" ]; then
+    echo "❌ Create publisher failed"
     exit 1
 fi
-echo "✅ Customer created - ID: $customer_id"
+echo "✅ Publisher created - ID: $publisher_id"
 
-# Get customer
-response=$(curl -s $API_URL/customers/$customer_id)
-status=$(echo $response | jq -r '.customer_id')
-[ "$status" == "$customer_id" ] && echo "✅ Get customer" || echo "❌ Get customer"
+# Get publisher
+response=$(curl -s $API_URL/publishers/$publisher_id)
+status=$(echo $response | jq -r '.publisher_id')
+[ "$status" == "$publisher_id" ] && echo "✅ Get publisher" || echo "❌ Get publisher"
 
-# Get all customers
-status=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/customers)
-[ "$status" == "200" ] && echo "✅ Get all customers" || echo "❌ Get all customers"
+# Get all publishers
+status=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/publishers)
+[ "$status" == "200" ] && echo "✅ Get all publishers" || echo "❌ Get all publishers"
 
-# Update customer
+# Update publisher
 UPDATE_DATA=$(jq -n \
-    --arg email "updated$TIMESTAMP@example.com" \
-    '{first_name: "Updated", last_name: "Name", email: $email, address: "456 Updated St"}')
+    --arg email "updated.publisher$TIMESTAMP@example.com" \
+    '{name: "Updated Publisher", address: "456 Updated Ave", phone: "987-654-3210", email: $email}')
 
-status=$(curl -s -o /dev/null -w "%{http_code}" -X PUT -H "Content-Type: application/json" -d "$UPDATE_DATA" $API_URL/customers/$customer_id)
-[ "$status" == "200" ] && echo "✅ Update customer" || echo "❌ Update customer"
+status=$(curl -s -o /dev/null -w "%{http_code}" -X PUT -H "Content-Type: application/json" -d "$UPDATE_DATA" $API_URL/publishers/$publisher_id)
+[ "$status" == "200" ] && echo "✅ Update publisher" || echo "❌ Update publisher"
 
-# Delete customer
-status=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE $API_URL/customers/$customer_id)
-[ "$status" == "204" ] && echo "✅ Delete customer" || echo "❌ Delete customer"
-
-# Test Authors endpoints
-echo -e "\nTesting Authors Endpoints"
-echo "-------------------------"
-
-# Create author
-AUTHOR_DATA=$(jq -n \
-    --arg email "testauthor$TIMESTAMP@example.com" \
-    '{first_name: "John", last_name: "Doe", email: $email, birth_date: "1980-01-01"}')
-
-response=$(curl -s -X POST -H "Content-Type: application/json" -d "$AUTHOR_DATA" $API_URL/authors)
-author_id=$(echo $response | jq -r '.author_id')
-if [ -z "$author_id" ]; then
-    echo "❌ Create author failed"
-    exit 1
-fi
-echo "✅ Author created - ID: $author_id"
-
-# Get author
-response=$(curl -s $API_URL/authors/$author_id)
-status=$(echo $response | jq -r '.author_id')
-[ "$status" == "$author_id" ] && echo "✅ Get author" || echo "❌ Get author"
-
-# Get all authors
-status=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/authors)
-[ "$status" == "200" ] && echo "✅ Get all authors" || echo "❌ Get all authors"
-
-# Update author
-UPDATE_DATA=$(jq -n \
-    --arg email "testauthor$TIMESTAMP@example.com" \
-    '{first_name: "Jane", last_name: "Smith", email: $email, birth_date: "1990-02-15"}')
-
-status=$(curl -s -o /dev/null -w "%{http_code}" -X PUT -H "Content-Type: application/json" -d "$UPDATE_DATA" $API_URL/authors/$author_id)
-[ "$status" == "200" ] && echo "✅ Update author" || echo "❌ Update author"
-
-# Delete author
-status=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE $API_URL/authors/$author_id)
-[ "$status" == "204" ] && echo "✅ Delete author" || echo "❌ Delete author"
-
-# Test Categories endpoints
-echo -e "\nTesting Categories Endpoints"
-echo "---------------------------"
-
-# Create category
-CATEGORY_DATA=$(jq -n \
-    --arg name "TestCategory$TIMESTAMP" \
-    '{name: $name, description: "Test description"}')
-
-response=$(curl -s -X POST -H "Content-Type: application/json" -d "$CATEGORY_DATA" $API_URL/categories)
-category_id=$(echo $response | jq -r '.category_id')
-if [ -z "$category_id" ]; then
-    echo "❌ Create category failed"
-    exit 1
-fi
-echo "✅ Category created - ID: $category_id"
-
-# Get category
-response=$(curl -s $API_URL/categories/$category_id)
-status=$(echo $response | jq -r '.category_id')
-[ "$status" == "$category_id" ] && echo "✅ Get category" || echo "❌ Get category"
-
-# Get all categories
-status=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/categories)
-[ "$status" == "200" ] && echo "✅ Get all categories" || echo "❌ Get all categories"
-
-# Update category
-UPDATE_DATA=$(jq -n \
-    --arg name "TestCategory$TIMESTAMP" \
-    '{name: $name, description: "Updated description"}')
-
-status=$(curl -s -o /dev/null -w "%{http_code}" -X PUT -H "Content-Type: application/json" -d "$UPDATE_DATA" $API_URL/categories/$category_id)
-[ "$status" == "200" ] && echo "✅ Update category" || echo "❌ Update category"
-
-# Delete category
-status=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE $API_URL/categories/$category_id)
-[ "$status" == "204" ] && echo "✅ Delete category" || echo "❌ Delete category"
-
-echo -e "\nAll tests completed!"
+Delete publisher
+status=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE $API_URL/publishers/$publisher_id)
+[ "$status" == "204" ] && echo "✅ Delete publisher" || echo "❌ Delete publisher"

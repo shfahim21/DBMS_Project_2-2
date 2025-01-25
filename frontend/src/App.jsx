@@ -47,6 +47,9 @@ import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-do
 import Customers from './components/Customers';
 import Authors from './components/Authors';
 import Categories from './components/Categories';
+import Publishers from './components/Publishers';
+import Orders from './components/Orders';
+import Books from './components/Books';
 import './App.css';
 
 function App() {
@@ -63,6 +66,7 @@ function App() {
         </header>
 
         <nav className="tabs">
+          
           <NavLink 
             to="/customers" 
             className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
@@ -81,14 +85,37 @@ function App() {
           >
             Categories
           </NavLink>
+
+          <NavLink
+            to="/publishers"
+            className={({isActive}) => `nav-link ${isActive ? 'active' : ''}`}
+          >
+            Publishers
+          </NavLink>
+          <NavLink
+          to={"/orders"}
+          className={({isActive}) => `nav-link ${isActive ? 'active' :' '}`}
+          >
+            Orders
+          </NavLink>
+          <NavLink
+            to="/books"
+            className={({isActive}) => `nav-link ${isActive? 'active' : ''}`}
+          >
+            Books
+          </NavLink>
         </nav>
 
         <main className="main-content">
           <Routes>
+            
             <Route path="/customers" element={<Customers />} />
             <Route path="/authors" element={<Authors />} />
             <Route path="/categories" element={<Categories />} />
+            <Route path="/publishers" element={<Publishers />} />
+            <Route path="/orders" element={<Orders />} />
             <Route path="/" element={<Customers />} />
+            <Route path="/books" element={<Books />} />
           </Routes>
         </main>
       </div>

@@ -57,3 +57,41 @@ else
   echo "DELETE: ❌"
   echo "Error: $(echo $DELETE | jq -r '.error')"
 fi
+
+# Test Publishers endpoints
+echo -e "\nTesting Publishers Endpoints"
+echo "---------------------------"
+
+# Create publisher
+PUBLISHER_DATA=$(jq -n \
+    --arg email "testpublisher$TIMESTAMP@example.com" \
+    '{name: "Test Publisher", address: "789 Publishing Rd", phone: "123-456-7890", email: $email}')
+
+response=$(curl -s -X POST -H "Content-Type: application/json" -d "$PUBLISHER_DATA" $API_URL/publishers)
+publisher_id=$(echo $response | jq -r '.publisher_id')
+if [ -z "$publisher_id" ]; then
+    echo "❌ Create publisher failed"
+    exit 1
+fi
+echo "✅ Publisher created - ID: $publisher_id"
+
+# Get publisher
+response=$(curl -s $API_URL/publishers/$publisher_id)
+status=$(echo $response | jq -r '.publisher_id')
+[ "$status" == "$publisher_id" ] && echo "✅ Get publisher" || echo "❌ Get publisher"
+
+# Get all publishers
+status=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/publishers)
+[ "$status" == "200" ] && echo "✅ Get all publishers" || echo "❌ Get all publishers"
+
+# Update publisher
+UPDATE_DATA=$(jq -n \
+    --arg email "updated.publisher$TIMESTAMP@example.com" \
+    '{name: "Updated Publisher", address: "456 Updated Ave", phone: "987-654-3210", email: $email}')
+
+status=$(curl -s -o /dev/null -w "%{http_code}" -X PUT -H "Content-Type: application/json" -d "$UPDATE_DATA" $API_URL/publishers/$publisher_id)
+[ "$status" == "200" ] && echo "✅ Update publisher" || echo "❌ Update publisher"
+
+# Delete publisher
+status=$(curl -s -o /dev/null -w "%{http_code}" -X DELETE $API_URL/publishers/$publisher_id)
+[ "$status" == "204" ] && echo "✅ Delete publisher" || echo "❌ Delete publisher"

@@ -20,7 +20,7 @@
   }
   
   .header-content {
-    max-width: 1200px;
+    max-width: 2000px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -36,7 +36,7 @@
   .app-header h1 {
     margin: 0;
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 800;
     color: var(--text);
   }
   
@@ -47,13 +47,13 @@
   }
   
   .nav-link {
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem .5rem;
     margin-right: 0.5rem;
     text-decoration: none;
     color: var(--text);
-    border-radius: 0.75rem;
+    border-radius: 2rem;
     transition: all 0.2s ease;
-    font-weight: 500;
+    font-weight: 650;
   }
   
   .nav-link:hover {
@@ -67,7 +67,7 @@
   }
   
   .main-content {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 2rem;
+    max-width: 2000px;
+    margin: 1rem auto;
+    padding: 0 .75rem;
   }

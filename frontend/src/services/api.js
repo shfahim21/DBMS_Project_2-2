@@ -29,3 +29,28 @@ export const categoriesApi = {
   update: (id, data) => api.put(`/categories/${id}`, data),
   delete: (id) => api.delete(`/categories/${id}`)
 };
+
+// services/api.js
+export const publishersApi = {
+    getAll: () => api.get('/publishers'),
+    getById: (id) => api.get(`/publishers/${id}`),
+    create: (data) => api.post('/publishers', data),
+    update: (id, data) => api.put(`/publishers/${id}`, data),
+    delete: (id) => api.delete(`/publishers/${id}`)
+  };
+
+  export const ordersApi = {
+    getAll: () => api.get('/orders'),
+    getById: (id) => api.get(`/orders/${id}`),
+    create: (data) => api.post('/orders', data),
+    update: (id, data) => api.put(`/orders/${id}`, data),
+    delete: (id) => api.delete(`/orders/${id}`)
+  };
+
+  export const booksApi = {
+    getAll: (params) => api.get('/books', { params }),
+    getById: (id) => api.get(`/books/${id}`),
+    create: (data) => api.post('/books', data),
+    update: (id, data) => api.put(`/books/${id}`, data),
+    delete: (id) => api.delete(`/books/${id}`)
+  };
