@@ -1,0 +1,260 @@
+/* styles/styles.css */
+:root {
+    --primary: #3b82f6;      /* Modern blue */
+    --secondary: #6366f1;    /* Soft purple */
+    --success: #22c55e;      /* Fresh green */
+    --danger: #ef4444;       /* Vibrant red */
+    --text: #1e293b;         /* Dark slate */
+    --bg-light: #f8fafc;     /* Light background */
+    --border: #e2e8f0;       /* Light gray border */
+    --hover-bg: #f1f5f9;     /* Hover background */
+  }
+  
+  /* Base styles */
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+  }
+  
+  .data-container {
+    padding: 2rem;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-input {
+    padding: 0.75rem 1rem;
+    width: 300px;
+    border: 2px solid var(--border);
+    border-radius: 999px;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .add-button {
+    background: #0dd891;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .add-button:hover {
+    background: #d42df5;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+  }
+  
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background: white;
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 1rem 1.5rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .data-table th {
+    background: var(--bg-light);
+    font-weight: 600;
+    color: #64748b;
+  }
+  
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .data-table tr:hover td {
+    background: var(--hover-bg);
+  }
+  
+  .edit-button {
+    background: var(--primary);
+    background: #0dd891;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    /* font-style: bold; */
+    margin-right: 1rem;
+  }
+  
+  .edit-button:hover {
+    background: #019a64;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+  }
+  
+  .delete-button {
+    background: var(--danger);
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+  
+  .delete-button:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 440px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    transform: scale(0.95);
+    animation: modalEnter 0.2s ease forwards;
+  }
+  
+  @keyframes modalEnter {
+    to {
+      transform: scale(1);
+    }
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #334155;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border);
+    border-radius: 999px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  }
+  
+  .button-group {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+  }
+  
+  .submit-button {
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .submit-button:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+  }
+  
+  .cancel-button {
+    background: var(--border);
+    color: var(--text);
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .cancel-button:hover {
+    background: #cbd5e1;
+    transform: translateY(-1px);
+  }
+  
+  /* Modern enhancements */
+  .data-table {
+    border-radius: 1rem;
+  }
+  
+  .search-input::placeholder {
+    color: #94a3b8;
+  }
+  
+  .add-button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .data-table th {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+  }
+  
+  .error-message {
+    color: var(--danger);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }

@@ -1,0 +1,79 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Previous head content remains the same -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-book"></i> Bookstore Management System</h1>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-button active" data-tab="books">Books</button>
+            <button class="tab-button" data-tab="authors">Authors</button>
+            <button class="tab-button" data-tab="publishers">Publishers</button>
+            <button class="tab-button" data-tab="categories">Categories</button>
+            <button class="tab-button" data-tab="customers">Customers</button>
+            <button class="tab-button" data-tab="orders">Orders</button>
+            <button class="tab-button" data-tab="reviews">Reviews</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tab-content">
+            <!-- Books Tab (Your existing content) -->
+            <div id="books-tab" class="tab-pane active">
+                <!-- Your existing books form and table -->
+            </div>
+
+            <!-- Authors Tab -->
+            <div id="authors-tab" class="tab-pane">
+                <form id="author-form" class="data-form">
+                    <div class="form-grid">
+                        <input type="hidden" id="author-id">
+                        <div class="form-group">
+                            <label for="author-first-name">First Name</label>
+                            <input type="text" id="author-first-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="author-last-name">Last Name</label>
+                            <input type="text" id="author-last-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="author-email">Email</label>
+                            <input type="email" id="author-email">
+                        </div>
+                        <div class="form-group">
+                            <label for="author-birth-date">Birth Date</label>
+                            <input type="date" id="author-birth-date">
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" class="btn btn-primary">Add Author</button>
+                        <button type="button" id="update-author-btn" class="btn btn-warning" style="display: none;">Update Author</button>
+                    </div>
+                </form>
+                <table id="authors-table" class="data-table">
+                    <!-- Authors table content -->
+                </table>
+            </div>
+
+            <!-- Publishers Tab -->
+            <div id="publishers-tab" class="tab-pane">
+                <form id="publisher-form" class="data-form">
+                    <!-- Similar structure for publishers form -->
+                </form>
+                <table id="publishers-table" class="data-table">
+                    <!-- Publishers table content -->
+                </table>
+            </div>
+
+            <!-- Add similar structures for other tabs -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
