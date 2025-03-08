@@ -1,3 +1,4 @@
+//src/components/authform.js
 import React, { useState, useEffect } from 'react';
 
 const AuthorForm = ({ author, onSubmit, onClose }) => {

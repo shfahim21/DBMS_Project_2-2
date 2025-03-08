@@ -9,6 +9,10 @@ const categoryRoutes = require('./routes/categories');
 const customerRoutes = require('./routes/customers');
 const orderRoutes = require('./routes/orders');
 const publisherRoutes = require('./routes/publishers');
+const bookAuthorsRoutes = require('./routes/bookauthors');
+const orderDetailsRoutes = require('./routes/orderdetails');
+const Unified = require('./routes/unified');
+
 // const reviewRoutes = require('./routes/reviews');
 
 // Middleware
@@ -22,6 +26,11 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/publishers', publisherRoutes);
+app.use('/api/bookauthors',bookAuthorsRoutes);
+app.use('/api/orderdetails',orderDetailsRoutes);
+app.use('/api/unified', Unified);
+
+
 // app.use('/api/reviews', reviewRoutes);
 
 // Error handling middleware

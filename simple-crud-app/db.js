@@ -1,6 +1,11 @@
 //db.js
 const { Pool } = require('pg');
 
+
+// to connect to database on terminal
+// psql -U fahim -d book-store1
+
+
 const pool = new Pool({
   user: 'fahim',
   host: 'localhost',

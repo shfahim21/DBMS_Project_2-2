@@ -83,6 +83,7 @@ const Orders = () => {
       <table className="data-table">
         <thead>
           <tr>
+            <th>Id</th>
             <th>Customer</th>
             <th>Email</th>
             <th>Total Amount</th>
@@ -94,6 +95,7 @@ const Orders = () => {
         <tbody>
           {filteredOrders.map(order => (
             <tr key={order.order_id}>
+              <td>{`${order.order_id}`}</td>
               <td>{`${order.first_name} ${order.last_name}`}</td>
               <td>{order.email}</td>
               <td>${parseFloat(order.total_amount).toFixed(2)}</td>
@@ -143,3 +145,123 @@ const Orders = () => {
 };
 
 export default Orders;
+
+
+
+
+
+
+
+// const express = require('express');
+// const router = express.Router();
+// const pool = require('../db');
+
+// // Create order with items
+// router.post('/', async (req, res) => {
+//   const client = await pool.connect();
+//   try {
+//     await client.query('BEGIN');
+
+//     // Handle customer creation if new
+//     let customerId = req.body.customer_id;
+//     if (req.body.new_customer) {
+//       const customerRes = await client.query(
+//         `INSERT INTO Customers (first_name, last_name, email)
+//          VALUES ($1, $2, $3) RETURNING customer_id`,
+//         [req.body.new_customer.first_name, 
+//          req.body.new_customer.last_name, 
+//          req.body.new_customer.email]
+//       );
+//       customerId = customerRes.rows[0].customer_id;
+//     }
+
+//     // Create order
+//     const orderRes = await client.query(
+//       `INSERT INTO Orders (customer_id, total_amount, status)
+//        VALUES ($1, $2, $3) RETURNING *`,
+//       [customerId, req.body.total_amount, req.body.status]
+//     );
+//     const order = orderRes.rows[0];
+
+//     // Insert order items
+//     for (const item of req.body.items) {
+//       // Check book availability
+//       const bookCheck = await client.query(
+//         'SELECT stock_quantity, price FROM Books WHERE book_id = $1',
+//         [item.book_id]
+//       );
+      
+//       if (bookCheck.rows.length === 0) {
+//         throw new Error(`Book ${item.book_id} not found`);
+//       }
+      
+//       if (bookCheck.rows[0].stock_quantity < item.quantity) {
+//         throw new Error(`Insufficient stock for book ${item.book_id}`);
+//       }
+
+//       // Insert order detail
+//       await client.query(
+//         `INSERT INTO OrderDetails 
+//           (order_id, book_id, quantity, unit_price)
+//          VALUES ($1, $2, $3, $4)`,
+//         [order.order_id, item.book_id, item.quantity, item.unit_price]
+//       );
+
+//       // Update book stock
+//       await client.query(
+//         'UPDATE Books SET stock_quantity = stock_quantity - $1 WHERE book_id = $2',
+//         [item.quantity, item.book_id]
+//       );
+//     }
+
+//     await client.query('COMMIT');
+//     res.status(201).json(order);
+//   } catch (error) {
+//     await client.query('ROLLBACK');
+//     res.status(400).json({ error: error.message });
+//   } finally {
+//     client.release();
+//   }
+// });
+
+// // Update order with items
+// router.put('/:id', async (req, res) => {
+//   const client = await pool.connect();
+//   try {
+//     await client.query('BEGIN');
+
+//     // Update order details
+//     await client.query(
+//       `UPDATE Orders SET
+//         customer_id = $1,
+//         total_amount = $2,
+//         status = $3
+//        WHERE order_id = $4`,
+//       [req.body.customer_id, req.body.total_amount, req.body.status, req.params.id]
+//     );
+
+//     // Delete existing items
+//     await client.query(
+//       'DELETE FROM OrderDetails WHERE order_id = $1',
+//       [req.params.id]
+//     );
+
+//     // Insert updated items
+//     for (const item of req.body.items) {
+//       // Similar item handling as in POST
+//       // (include stock checks and updates)
+//     }
+
+//     await client.query('COMMIT');
+//     res.json({ message: 'Order updated successfully' });
+//   } catch (error) {
+//     await client.query('ROLLBACK');
+//     res.status(400).json({ error: error.message });
+//   } finally {
+//     client.release();
+//   }
+// });
+
+// // Keep other routes (GET, DELETE) as before
+
+// module.exports = router;
